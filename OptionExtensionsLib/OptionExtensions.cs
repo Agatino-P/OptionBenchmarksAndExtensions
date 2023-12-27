@@ -2,16 +2,11 @@
 
 namespace OptionExtensionsLib;
 
-public static class OptionExtensions
+public static class OptionNullExtensions
 {
-    public static A? NullOnNone<A>(this ref Option<A> option) where A : struct
-    {
-        return option.IsNone ? null : option.IfNone(default(A));
-    }
+    public static A? IfNoneNullable<A>(this Option<A> option) where A : struct => 
+        option.IsNone ? null : option.IfNone(default(A));
 
-    public static A? NullableOnNone<A>(this ref Option<A> option) where A : class
-    {
-        return option.IsNone ? null : option.IfNone(default(A)!);
-    }
-
+    public static A? IfNoneNull<A>(this Option<A> option) => 
+        option.IsNone ? default : option.IfNone(default(A)!);
 }
